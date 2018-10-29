@@ -4,9 +4,11 @@ import { pixel2Bytes, bytes2Pixel } from '../utils/pixel';
 self.process = function([imageData]) {
   const data = new Uint32Array(imageData.data.buffer);
   self.start(imageData);
+  // const pos = { x: 0, y: 0 };
   for (let i = data.length; i >= 0; i--) {
     let px = bytes2Pixel(data[i]);
     if (px[3]) {
+      // updatePosByIndex(pos, imageData.width, i);
       self.tick(px, i);
       data[i] = pixel2Bytes(px);
     }
@@ -25,3 +27,8 @@ self.clearPixel = function(px) {
 self.start = function() {};
 self.tick = function() {};
 self.end = function() {};
+
+// function updatePosByIndex(pos, width, i) {
+//   pos.x = i % width;
+//   pos.y = Math.floor(i / width);
+// }

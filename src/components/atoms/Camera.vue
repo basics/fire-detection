@@ -18,10 +18,6 @@ export default {
     frameRate: {
       type: Number,
       default: null
-    },
-    width: {
-      type: Number,
-      default: 160
     }
   },
 
@@ -29,8 +25,7 @@ export default {
     return {
       config: {
         facingMode: this.facingMode,
-        frameRate: this.frameRate,
-        width: this.width
+        frameRate: this.frameRate
       }
     };
   },

@@ -11,6 +11,7 @@ self.start = function(imageData) {
 };
 
 self.tick = function(px, index) {
+  // index = pos.y * 160 + pos.x;
   let oldPx = buffer.get(index);
   buffer.set(px, index);
 

@@ -1,4 +1,4 @@
-import '../image.base';
+import '../pipeline.base';
 
 self.importScripts(
   'https://huningxin.github.io/opencv.js/build/asm.js/opencv.js'
@@ -49,18 +49,18 @@ function drawContour(input, output) {
   );
   // console.warn('contours', contours);
   // draw contours with random Scalar
-  let c = 0;
+  // let c = 0;
 
   const sorted = new Array(contours.size())
     .fill(0)
     .map((val, i) => contours.get(i));
   sorted.sort((a, b) => a.width * a.height - b.width * b.height);
 
-  for (let i = 0; i < Math.min(3, sorted.length); i++) {
+  for (let i = 0; i < Math.min(50, sorted.length); i++) {
     let rect = self.cv.boundingRect(sorted[i]);
 
     // if (rect.width * rect.height > 40) {
-    c += 0.2;
+    // c += 0.2;
     // let color = new cv.Scalar(
     //   Math.round(Math.random() * 255),
     //   Math.round(Math.random() * 255),
@@ -68,16 +68,15 @@ function drawContour(input, output) {
     // );
     // cv.drawContours(dst, contours, i, color, 1, cv.LINE_8, hierarchy, 100);
 
-    // let color = [Math.random(), Math.random(), Math.random()];
-    let color = [0.2 + (c % 1), 0.2 + (c % 1), 0.2 + (c % 1)];
+    // let color = [0.2 + (c % 1), 0.2 + (c % 1), 0.2 + (c % 1)];
 
     for (let x = rect.x; x < rect.x + rect.width; x++) {
       for (let y = rect.y; y < rect.y + rect.height; y++) {
         const index = y * input.width + x;
 
-        output.data[index * 4 + 0] = Math.round(color[0] * 255);
-        output.data[index * 4 + 1] = Math.round(color[1] * 255);
-        output.data[index * 4 + 2] = Math.round(color[2] * 255);
+        // output.data[index * 4 + 0] = Math.round(color[0] * 255);
+        // output.data[index * 4 + 1] = Math.round(color[1] * 255);
+        // output.data[index * 4 + 2] = Math.round(color[2] * 255);
         output.data[index * 4 + 3] = 255;
       }
     }
@@ -93,6 +92,7 @@ function drawContour(input, output) {
   hierarchy.delete();
 }
 
-self.end = function(imageData) {
+self.process = function([imageData]) {
   drawContour(imageData, imageData);
+  return imageData;
 };

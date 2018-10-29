@@ -10,6 +10,45 @@
 
     <!-- <option-canvas
       :source="source"
+      :filter="['image/movement']"
+      :frame-rate="frameRate"
+      :width="width"
+      :height="height"
+    /> -->
+
+    <option-canvas
+      :source="source"
+      :filter="['image/gaussian-blur', 'image/labcie', 'image/movement', 'image/contour']"
+      :frame-rate="frameRate"
+      :width="width"
+      :height="height"
+    >
+      <template slot="options">
+        <slider
+          :default="3"
+          :min="0"
+          :max="20"
+          name="image/gaussian-blur"
+          prop="radius"/>
+        <range-slider
+          :default="[35, 150]"
+          :min="0"
+          :max="150"
+          name="image/movement"
+          prop="threshold"/>
+      </template>
+    </option-canvas>
+
+    <option-canvas
+      :source="source"
+      :filter="['image/sat-move', 'image/labcie']"
+      :frame-rate="frameRate"
+      :width="width"
+      :height="height"
+    />
+
+    <!-- <option-canvas
+      :source="source"
       :filter="['image/greyscale']"
       :frame-rate="frameRate"
       :width="width"
@@ -26,7 +65,7 @@
 
      -->
 
-    <option-canvas
+    <!-- <option-canvas
       :source="source"
       :filter="['image/labcie', 'image/contour']"
       :frame-rate="frameRate"
@@ -36,7 +75,7 @@
 
     <option-canvas
       :source="source"
-      :filter="['image/clamp-hsl']"
+      :filter="['image/smooth', 'image/clamp-hsl']"
       :frame-rate="frameRate"
       :width="width"
       :height="height"
@@ -90,7 +129,7 @@
           name="image/clamp-ohta"
           prop="i3"/>
       </template>
-    </option-canvas>
+    </option-canvas> -->
 
     <!-- <option-canvas
       :source="source"
@@ -183,7 +222,7 @@
           name="image/ohta-false-color"/></template>
     </option-canvas> -->
 
-    <option-canvas
+    <!-- <option-canvas
       :source="source"
       :filter="['image/clamp-hsl', 'image/movement', 'image/contour']"
       :frame-rate="frameRate"
@@ -215,7 +254,7 @@
           name="image/clamp-hsl"
           prop="l"/>
       </template>
-    </option-canvas>
+    </option-canvas> -->
 
     <camera
       class="camera"

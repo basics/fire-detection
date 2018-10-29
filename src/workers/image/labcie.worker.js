@@ -26,12 +26,11 @@ self.end = function() {
 
 function calcAverage(result, lab) {
   let count = result.count;
-  if (lab[0] && lab[1] && lab[2]) {
-    result.average[0] = (result.average[0] * count + lab[0]) / (count + 1);
-    result.average[1] = (result.average[1] * count + lab[1]) / (count + 1);
-    result.average[2] = (result.average[2] * count + lab[2]) / (count + 1);
-    result.count++;
-  }
+
+  result.average[0] = (result.average[0] * count + lab[0]) / (count + 1);
+  result.average[1] = (result.average[1] * count + lab[1]) / (count + 1);
+  result.average[2] = (result.average[2] * count + lab[2]) / (count + 1);
+  result.count++;
 }
 
 function clampLabByAverage(lab, avg, px) {
@@ -44,8 +43,6 @@ function clampLabByAverage(lab, avg, px) {
       lab[2] > lab[1]
     )
   ) {
-    px[0] = 0;
-    px[1] = 0;
-    px[2] = 0;
+    self.clearPixel(px);
   }
 }
