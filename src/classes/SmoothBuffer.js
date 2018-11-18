@@ -14,14 +14,16 @@ export default class SmoothBuffer {
         res[0] += px[0];
         res[1] += px[1];
         res[2] += px[2];
+        res[3] += px[3];
         return res;
       },
-      [0, 0, 0]
+      [0, 0, 0, 0]
     );
 
     res[0] /= buffer.length;
     res[1] /= buffer.length;
     res[2] /= buffer.length;
+    res[3] /= buffer.length;
     return res;
   }
 
