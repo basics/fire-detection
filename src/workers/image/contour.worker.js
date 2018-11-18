@@ -56,7 +56,7 @@ function drawContour(input, output) {
     .map((val, i) => contours.get(i));
   sorted.sort((a, b) => a.width * a.height - b.width * b.height);
 
-  for (let i = 0; i < Math.min(50, sorted.length); i++) {
+  for (let i = 0; i < Math.min(25, sorted.length); i++) {
     let rect = self.cv.boundingRect(sorted[i]);
 
     // if (rect.width * rect.height > 40) {
@@ -70,8 +70,14 @@ function drawContour(input, output) {
 
     // let color = [0.2 + (c % 1), 0.2 + (c % 1), 0.2 + (c % 1)];
 
-    for (let x = rect.x; x < rect.x + rect.width; x++) {
-      for (let y = rect.y; y < rect.y + rect.height; y++) {
+    const additive = 5;
+    const fx = Math.max(rect.x - additive, 0);
+    const fy = Math.max(rect.y - additive, 0);
+    const tx = Math.min(rect.x + rect.width + additive, input.width);
+    const ty = Math.min(rect.y + rect.height + additive, input.height);
+
+    for (let x = fx; x < tx; x++) {
+      for (let y = fy; y < ty; y++) {
         const index = y * input.width + x;
 
         // output.data[index * 4 + 0] = Math.round(color[0] * 255);
